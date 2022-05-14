@@ -38,12 +38,16 @@ namespace Radar.Model
 
 		public static implicit operator Point(Point3D p) => new Point((int)Math.Floor(p.posX), (int)Math.Floor(p.posY));
 
-		public static Point3D operator +(Point3D from, Vector2D vec) => new Point3D(from.X + vec.X, from.Y + vec.Y, from.Z);
-		public static Point3D operator -(Point3D from, Vector2D vec) => new Point3D(from.X - vec.X, from.Y - vec.Y, from.Z);
-		public static Vector2D operator -(Point3D a, Point3D b) => new Vector2D(a, b);
+		public static Point3D operator +(Point3D from, Vector2D vec) => new Point3D(from.X + vec.DX, from.Y + vec.DY, from.Z);
+		public static Point3D operator -(Point3D from, Vector2D vec) => new Point3D(from.X - vec.DX, from.Y - vec.DY, from.Z);
+		public static Vector2D operator -(Point3D a, Point3D b) => new Vector2D(a.posX - b.posX, a.posY - b.posY);
 		public Point3D Translate(float dx, float dy)
 		{
 			return new Point3D(posX + dx, posY + dy, posZ);	
+		}
+		public Point3D Translate(Vector2D vec)
+		{
+			return new Point3D(posX + vec.DX, posY + vec.DY, posZ);
 		}
 		public override string ToString()
 		{

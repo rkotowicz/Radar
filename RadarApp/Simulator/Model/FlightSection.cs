@@ -7,11 +7,11 @@ namespace Radar.Model
 		Point3D startPoint;
 		Point3D endPoint;
 		Vector2D vec;
-		private float heading;
+		private CourseAngle heading;
 		private int height;
 		private int speed;
 
-		protected internal float Heading { get => heading; }
+		protected internal CourseAngle Heading { get => heading; }
 		protected internal int Speed { get => speed; }
 		protected internal int Height { get => height; }
         public Point3D StartPoint { get => startPoint; }
@@ -36,9 +36,9 @@ namespace Radar.Model
 			this.startPoint = start;
 			this.endPoint = dst;
 			this.speed = speed;
-			this.height = dst.Z;
+			this.height = (int)dst.Z;
 			vec = new Vector2D(startPoint, endPoint);
-			this.heading = vec.Heading;
+			this.heading = new CourseAngle(vec.Heading);
 		}
 
 		internal protected FlightSection Follow(Point3D pos)

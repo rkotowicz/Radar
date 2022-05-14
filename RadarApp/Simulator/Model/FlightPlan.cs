@@ -13,7 +13,7 @@ namespace Radar.Model
 		protected internal FlightSection Section { get => sections[currentSectionIdx]; }
 		public Point3D StartPoint { get => startPoint; }
 		public Point3D EndPoint { get => endPoint;  }
-		public float Heading { get => Section.Heading; }
+		public CourseAngle Heading { get => Section.Heading; }
 		public int Speed { get => Section.Speed; }
 
 		protected internal FlightPlan(IList<Point3D> list, int fpspeed)

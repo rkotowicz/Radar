@@ -9,15 +9,15 @@ namespace Radar.Model
 {
 	public class Point3D
 	{
-		private int posX;
-		private int posY;
-		private int posZ;
+		private float posX;
+		private float posY;
+		private float posZ;
 		
-		public int X { get => posX; set => posX = value; }
-		public int Y { get => posY; set => posY = value; }
-		public int Z { get => posZ; set => posZ = value; }
+		public float X { get => posX; set => posX = value; }
+		public float Y { get => posY; set => posY = value; }
+		public float Z { get => posZ; set => posZ = value; }
 
-		public Point3D(int x, int y, int z)
+		public Point3D(float x, float y, float z)
 		{
 			this.posX = x;
 			this.posY = y;
@@ -36,12 +36,12 @@ namespace Radar.Model
 			return new Point3D(rnd.Next(maxX), rnd.Next(maxY), rnd.Next(maxZ));
 		}
 
-		public static implicit operator Point(Point3D p) => new Point(p.posX, p.posY);
+		public static implicit operator Point(Point3D p) => new Point((int)Math.Floor(p.posX), (int)Math.Floor(p.posY));
 
 		public static Point3D operator +(Point3D from, Vector2D vec) => new Point3D(from.X + vec.X, from.Y + vec.Y, from.Z);
 		public static Point3D operator -(Point3D from, Vector2D vec) => new Point3D(from.X - vec.X, from.Y - vec.Y, from.Z);
 		public static Vector2D operator -(Point3D a, Point3D b) => new Vector2D(a, b);
-		public Point3D Translate(int dx, int dy)
+		public Point3D Translate(float dx, float dy)
 		{
 			return new Point3D(posX + dx, posY + dy, posZ);	
 		}

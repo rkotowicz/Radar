@@ -125,7 +125,7 @@ namespace Radar.Presenter
 		{
 			using (Pen pen = new Pen(penColor, penWidth))
 			{
-				Rectangle rect = new Rectangle(centre.X - radius, centre.Y - radius, radius * 2, radius * 2);
+				Rectangle rect = new Rectangle((int)centre.X - radius, (int)centre.Y - radius, radius * 2, radius * 2);
 				graphics.DrawEllipse(pen, rect);
 			}
 		}

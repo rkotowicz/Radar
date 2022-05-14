@@ -10,15 +10,15 @@ namespace Radar.Model
 {
     public class Vector2D
     {
-        int x;
-        int y;
-        public int X { get => x; }
-        public int Y { get => y; }
-        int heading;
-        public int Heading { get => heading; }
+        float x;
+        float y;
+        public float X { get => x; }
+        public float Y { get => y; }
+        float heading;
+        public float Heading { get => heading; }
         public float Length { get => Vector2D.Distance(this.x, this.y); }
 
-        public Vector2D(int dx, int dy)
+        public Vector2D(float dx, float dy)
         {
             this.x = dx;
             this.y = dy;
@@ -30,10 +30,10 @@ namespace Radar.Model
             this.y = end.Y - start.Y;
             this.heading = GetHeading();
         }
-        public Vector2D(float length, float heading)
+        public Vector2D(float length, CourseAngle course)
         {
-            this.x = (int)(Math.Sin(heading * Math.PI / 180.0) * length);
-            this.y = (int)(Math.Cos(heading * Math.PI / 180.0) * length);
+            this.x = (float)(Math.Sin(course.Heading * Math.PI / 180.0) * length);
+            this.y = (float)(Math.Cos(course.Heading * Math.PI / 180.0) * length);
             this.heading = GetHeading();
         }
 
@@ -52,7 +52,7 @@ namespace Radar.Model
             return new Vector2D(x - v.x, y - v.y);
         }
 
-        public static float Distance(int x, int y)
+        public static float Distance(float x, float y)
         {
             return (float)Math.Sqrt(x * x + y * y);
         }
@@ -62,15 +62,13 @@ namespace Radar.Model
             return new Vector2D((int)(vec.x * scale), (int)(vec.y * scale));
         }
 
-        private int GetHeading()
+        private float GetHeading()
         {
-            int dx = this.x;
-            int dy = this.y;
-            double h = Math.Atan2(dx, dy) * 180.0 / Math.PI;
-            if (h < 0) { h += 360; };
-            if (h > 360) { h -= 360; }
-            Debug.WriteLine($"    Heading: {h} dx:{dx} dy:{dy}");
-            return ((int)Math.Floor(h));
+            float dx = this.x;
+            float dy = this.y;
+            float angle = (float)(Math.Atan2(dx, dy) * 180.0 / Math.PI);
+            //Debug.WriteLine($"    Heading: {h} dx:{dx} dy:{dy}");
+            return CourseAngle.GetHeading(angle);
         }
 
         static Vector2D Rotate(Vector2D vec, int angle)

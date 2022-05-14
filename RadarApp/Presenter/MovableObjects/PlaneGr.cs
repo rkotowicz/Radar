@@ -13,16 +13,16 @@ namespace Radar.Presenter
 		internal protected static void Draw(Plane plane, IPresenter presenter)
 		{
             presenter.DrawSection(
-                plane.Position + new Vector2D((float)plane.Size, plane.Heading), 
-                plane.Position - new Vector2D((float)plane.Size, plane.Heading - 15),
+                plane.Position + new Vector2D((float)plane.Size, plane.Heading.Heading), 
+                plane.Position - new Vector2D((float)plane.Size, plane.Heading.Heading - 15),
                 Color.Green, 2);
             presenter.DrawSection(
-                plane.Position + new Vector2D((float)plane.Size, plane.Heading),
-                plane.Position - new Vector2D((float)plane.Size, plane.Heading + 15), 
+                plane.Position + new Vector2D((float)plane.Size, plane.Heading.Heading),
+                plane.Position - new Vector2D((float)plane.Size, plane.Heading.Heading + 15), 
                 Color.Green, 2);
             presenter.DrawSection(
-                plane.Position - new Vector2D((float)plane.Size, plane.Heading - 15),
-                plane.Position - new Vector2D((float)plane.Size, plane.Heading + 15),
+                plane.Position - new Vector2D((float)plane.Size, plane.Heading.Heading - 15),
+                plane.Position - new Vector2D((float)plane.Size, plane.Heading.Heading + 15),
                 Color.Green, 2);
 
             plane.flightPlan.Sections.ForEach(section => DrawFlightSection(section, presenter));
